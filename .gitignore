@@ -2,7 +2,7 @@
 venv/
 env/
 
-# Data directories (do not upload gigabytes of images)
+# Data directories 
 data/raw/
 data/processed/
 
