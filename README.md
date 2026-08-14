@@ -37,3 +37,18 @@ An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep L
 | **KNN Imputation ($k=5$)** | $75.45\% \pm 0.76\%$ | $75.53\% \pm 0.76\%$ | **$1.2029$** |
 | **Forward Fill** | **$76.24\% \pm 0.89\%$** | **$76.31\% \pm 0.89\%$** | $4.4624$ |
 | **Backward Fill** | $76.10\% \pm 0.92\%$ | $76.17\% \pm 0.94\%$ | $4.0302$ |
+
+## Step 4: Outlier Detection, Handling & ROI Extraction
+- **Detection Framework:** Benchmarked anomalies across Z-score ($|Z| > 3$), IQR ($1.5 \times \text{IQR}$), and Isolation Forest (3% contamination) on intensity and dimension metrics.
+- **Handling Strategies:**
+  - *Transformations:* Applied Log and Square-Root transformations to stabilize right-skewed distributions.
+  - *Capping:* Winsorized continuous features at the 1st and 99th percentiles.
+  - *Filtering:* Dropped **358 multi-method consensus outliers (5.10%)** to eliminate severely corrupted/distorted scans.
+- **Morphological ROI Extraction:** Implemented OpenCV extreme contour cropping to eliminate dead background margins and standardize regions of interest to $224 \times 224$.
+- **Artifact:** Exported curated cohort of **6,655 verified scans** to `data/metadata/metadata_clean_step4.csv`.
+
+| Stage / Metric | Step 3 Clean | Step 4 Processed |
+| :--- | :--- | :--- |
+| **Total Scans** | 7,013 | 6,655 |
+| **Outliers Removed** | 0 | 358 (5.10%) |
+| **ROI Standardization** | Variable | 224 × 224 (Contour Cropped) |
