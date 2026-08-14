@@ -91,3 +91,24 @@ An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep L
 | **Total Cohort** | **100.0%** | **1,774** | **1,735** | **1,748** | **1,398** | **6,655** |
 
 - **Artifact:** Exported final partitioned manifest to `data/metadata/metadata_stratified_step6.csv`.
+
+## Step 7: Bias-Variance Diagnostics & Regularization Protocols
+- **Empirical Diagnostics:** Formally benchmarked underfitting (Decision Stump, Train Acc: 45.47%, Macro F1: 33.63%) vs. overfitting (Unconstrained Tree, Train Acc: 100.00%, Val Acc: 68.84%, Generalization Gap: +31.16%).
+- **Regularization & Capacity Remediation:**
+  - *Polynomial Expansion:* Generated 27 degree-2 interaction features to overcome high bias.
+  - *L1/L2 Penalties:* Applied Lasso/Ridge constraints, reducing generalization variance gap to $<1.2\%$.
+  - *Tree Pruning:* Identified optimal cost-complexity parameter ($\alpha = 0.00156$), reducing variance gap from +31.16% down to +1.67%.
+  - *Neural Regularization:* Implemented L2 weight decay and early stopping on MLP, achieving optimal generalization ($\text{Val Acc} = 71.74\%$, $\text{Gap} = +0.15\%$).
+- **Diagnostic Curves:** Generated 5-fold cross-validated learning curves and cost-complexity pruning paths validating asymptotic convergence.
+
+| Model Strategy | Train Acc (%) | Val Acc (%) | Generalization Gap | Val Macro F1 (%) | Empirical Diagnosis |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **1. Decision Stump (`depth=1`)** | 45.47% | 44.59% | +0.88% | 33.63% | Severe Underfitting |
+| **2. Unconstrained Tree** | 100.00% | 68.84% | +31.16% | 70.09% | Severe Overfitting |
+| **3. Polynomial + LogReg** | 71.30% | 70.64% | +0.66% | 71.07% | Regularized Fit |
+| **4. L1 Lasso Regularization** | 69.73% | 68.74% | +0.99% | 69.10% | Regularized Fit |
+| **5. L2 Ridge Regularization** | 69.86% | 68.74% | +1.12% | 69.13% | Regularized Fit |
+| **6. Pruned Tree ($\alpha=0.00156$)** | 72.11% | 70.44% | +1.67% | 71.20% | Regularized Fit |
+| **7. Regularized Neural Net (MLP)** | **71.90%** | **71.74%** | **+0.15%** | **71.95%** | **Optimal Fit** |
+
+- **Artifact:** Exported validated manifest to `data/metadata/metadata_step7_validated.csv`.
