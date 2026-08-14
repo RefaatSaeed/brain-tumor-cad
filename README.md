@@ -112,3 +112,36 @@ An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep L
 | **7. Regularized Neural Net (MLP)** | **71.90%** | **71.74%** | **+0.15%** | **71.95%** | **Optimal Fit** |
 
 - **Artifact:** Exported validated manifest to `data/metadata/metadata_step7_validated.csv`.
+
+## Step 8: Multi-Metric Clinical Evaluation & Model Benchmarking
+- **Holdout Test Evaluation ($N = 999$):** Evaluated linear baselines, pruned decision trees, regularized MLPs, Random Forests, and Gradient Boosting ensembles on unseen holdout test scans.
+- **Diagnostic Visualizations:** Generated multi-class normalized confusion matrices, One-vs-Rest (OvR) ROC curves, precision-recall curves, and cross-model performance benchmarks.
+- **Classification Benchmark Matrix (Holdout Test Set):**
+
+| Model Architecture | Accuracy (%) | Balanced Acc (%) | Precision (Macro) | Recall (Macro) | F1-Macro (%) | Cohen's Kappa (κ) | MCC | OvR ROC-AUC |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **L2 Logistic Regression** | 70.57% | 71.33% | 70.70% | 71.33% | 70.82% | 0.6066 | 0.6080 | 0.8868 |
+| **Cost-Complexity Pruned Tree** | 74.77% | 75.93% | 76.85% | 75.93% | 75.66% | 0.6632 | 0.6674 | 0.9003 |
+| **Regularized MLP Neural Net** | 71.77% | 72.76% | 71.69% | 72.76% | 72.03% | 0.6230 | 0.6242 | 0.9097 |
+| **Random Forest (Top Performer)** | **77.78%** | **78.90%** | **78.23%** | **78.90%** | **78.47%** | **0.7033** | **0.7038** | **0.9387** |
+| **Gradient Boosting Ensemble** | 76.88% | 77.99% | 77.71% | 77.99% | 77.83% | 0.6910 | 0.6911 | 0.9347 |
+
+- **Per-Class Discriminative Performance (ROC-AUC & PR Analysis):**
+
+| Diagnostic Class | True Test Scans | Class Sensitivity | ROC-AUC | Average Precision (AP) |
+| :--- | :---: | :---: | :---: | :---: |
+| **No Tumor (`notumor`)** | 209 | **98.56%** | **0.998** | **0.992** |
+| **Pituitary (`pituitary`)** | 263 | **77.57%** | **0.948** | **0.869** |
+| **Glioma (`glioma`)** | 266 | **70.30%** | **0.914** | **0.817** |
+| **Meningioma (`meningioma`)** | 261 | **65.52%** | **0.879** | **0.714** |
+
+- **Auxiliary Quantitative Regression Evaluation:**
+
+| Regression Metric | Evaluation Formula | Holdout Test Score |
+| :--- | :--- | :---: |
+| **Coefficient of Determination ($R^2$)** | $1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}}$ | **0.8039** |
+| **Mean Absolute Error (MAE)** | $\frac{1}{N} \sum \|y - \hat{y}\|$ | **4.7058** |
+| **Root Mean Squared Error (RMSE)** | $\sqrt{\text{MSE}}$ | **6.6967** |
+| **Mean Squared Error (MSE)** | $\frac{1}{N} \sum (y - \hat{y})^2$ | **44.8464** |
+
+- **Artifact:** Exported benchmark audit to `data/metadata/model_evaluation_benchmarks.csv`.
