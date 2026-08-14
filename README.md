@@ -54,19 +54,25 @@ An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep L
 | **ROI Standardization** | Variable | 224 × 224 (Contour Cropped) |
 
 ## Step 5: Exploratory Data Visualization & Quality Audit
-- **Visual Suite:** Generated 7 publication-grade exploratory figures covering univariate KDE densities, correlation heatmaps, bivariate feature interactions, multivariate pairplots, and anatomical MRI slice grids.
+- **Visual Suite:** Constructed 7 exploratory figures covering class balance, univariate KDE distributions, correlation heatmaps, bivariate feature interaction planes, multivariate pairplots, and slice mosaics.
 - **Class Stratification Audit:** Formally verified the 4-class distribution across all 6,655 curated scans:
-  - `No Tumor`: 1,858 scans (27.92%)
-  - `Pituitary`: 1,680 scans (25.24%)
-  - `Glioma`: 1,560 scans (23.44%)
-  - `Meningioma`: 1,557 scans (23.40%)
-- **Feature Covariance:** Quantified dimensional coupling ($r = 0.94$ for height vs. file size; $r = 0.44$ for mean intensity vs. standard deviation), proving that first-order pixel statistics have non-linear class overlap that requires deep neural representation learning.
-- **Pipeline Quality Matrix:** Validated data integrity across all stages (7,200 raw $\rightarrow$ 7,013 deduplicated $\rightarrow$ 6,655 clean scans).
+  - `Glioma`: 1,774 scans (26.66%)
+  - `Pituitary`: 1,748 scans (26.27%)
+  - `Meningioma`: 1,735 scans (26.07%)
+  - `No Tumor`: 1,398 scans (21.01%)
+- **Covariance & Feature Dependencies:** Quantified structural and statistical couplings ($r = +0.99$ for width vs. height; $r = +0.71$ for mean intensity vs. standard deviation).
+- **Data Quality Matrix:** Confirmed the structured pipeline transition across ingestion stages:
 
-| Class Label | Scan Count | Percentage (%) | Distribution Status |
-| :--- | :--- | :--- | :--- |
-| **No Tumor (`notumor`)** | 1,858 | 27.92% | Balanced |
-| **Pituitary (`pituitary`)** | 1,680 | 25.24% | Balanced |
-| **Glioma (`glioma`)** | 1,560 | 23.44% | Balanced |
-| **Meningioma (`meningioma`)** | 1,557 | 23.40% | Balanced |
+| Processing Stage | Valid Scans | Missing Attributes | Cryptographic Duplicates | Severe Outliers Filtered |
+| :--- | :---: | :---: | :---: | :---: |
+| **Raw Ingested** | 7,200 | 0 | 187 (2.60%) | 358 (5.10%) |
+| **Step 3 (Cleaned Manifest)** | 7,013 | 0 | 0 | 358 |
+| **Step 4 (Processed Cohort)** | **6,655** | **0** | **0** | **0** |
+
+| Class Label | Scan Count | Percentage (%) | Distribution Balance |
+| :--- | :---: | :---: | :---: |
+| **Glioma (`glioma`)** | 1,774 | 26.66% | Balanced |
+| **Pituitary (`pituitary`)** | 1,748 | 26.27% | Balanced |
+| **Meningioma (`meningioma`)** | 1,735 | 26.07% | Balanced |
+| **No Tumor (`notumor`)** | 1,398 | 21.01% | Balanced |
 | **Total Cohort** | **6,655** | **100.00%** | Verified |
