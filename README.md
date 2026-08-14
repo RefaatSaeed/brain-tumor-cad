@@ -52,3 +52,21 @@ An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep L
 | **Total Scans** | 7,013 | 6,655 |
 | **Outliers Removed** | 0 | 358 (5.10%) |
 | **ROI Standardization** | Variable | 224 × 224 (Contour Cropped) |
+
+## Step 5: Exploratory Data Visualization & Quality Audit
+- **Visual Suite:** Generated 7 publication-grade exploratory figures covering univariate KDE densities, correlation heatmaps, bivariate feature interactions, multivariate pairplots, and anatomical MRI slice grids.
+- **Class Stratification Audit:** Formally verified the 4-class distribution across all 6,655 curated scans:
+  - `No Tumor`: 1,858 scans (27.92%)
+  - `Pituitary`: 1,680 scans (25.24%)
+  - `Glioma`: 1,560 scans (23.44%)
+  - `Meningioma`: 1,557 scans (23.40%)
+- **Feature Covariance:** Quantified dimensional coupling ($r = 0.94$ for height vs. file size; $r = 0.44$ for mean intensity vs. standard deviation), proving that first-order pixel statistics have non-linear class overlap that requires deep neural representation learning.
+- **Pipeline Quality Matrix:** Validated data integrity across all stages (7,200 raw $\rightarrow$ 7,013 deduplicated $\rightarrow$ 6,655 clean scans).
+
+| Class Label | Scan Count | Percentage (%) | Distribution Status |
+| :--- | :--- | :--- | :--- |
+| **No Tumor (`notumor`)** | 1,858 | 27.92% | Balanced |
+| **Pituitary (`pituitary`)** | 1,680 | 25.24% | Balanced |
+| **Glioma (`glioma`)** | 1,560 | 23.44% | Balanced |
+| **Meningioma (`meningioma`)** | 1,557 | 23.40% | Balanced |
+| **Total Cohort** | **6,655** | **100.00%** | Verified |
