@@ -145,3 +145,24 @@ An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep L
 | **Mean Squared Error (MSE)** | $\frac{1}{N} \sum (y - \hat{y})^2$ | **44.8464** |
 
 - **Artifact:** Exported benchmark audit to `data/metadata/model_evaluation_benchmarks.csv`.
+
+
+## Key Findings
+
+Our comparative analysis highlights the effectiveness of modern deep learning architectures for automated brain tumor classification:
+
+| Architecture | Test Accuracy | Macro F1-Score | Clinical Interpretability |
+| :--- | :--- | :--- | :--- |
+| Random Forest (Baseline) | 77.78% | 78.47% | Low |
+| **ConvNeXt-Tiny** | **99.20%** | **99.23%** | **High (Grad-CAM)** |
+| Swin-Transformer-Tiny | 99.10% | 99.12% | High (Attention) |
+
+### Highlights:
+- **Architectural Performance:** Deep Learning models surpassed traditional ML baselines by over 20% in overall accuracy, demonstrating the power of feature extraction via deep hierarchical architectures.
+- **Explainability (XAI):** We integrated Grad-CAM to visualize model decision-making. The high overlap between the model's activations and known clinical tumor locations provides "white-box" evidence, building trust for clinical applications.
+- **Robustness:** Stratified dataset management and cost-sensitive loss functions ensured balanced classification, effectively handling the intrinsic class imbalance in the source MRI dataset.
+
+---
+### Future Directions
+- **Clinical Validation:** Future work will involve testing the model on multi-center datasets to assess robustness against variations in MRI scanner hardware and imaging protocols.
+- **Deployment:** Transitioning the model into a lightweight, real-time inferencing application for neuro-radiology support.
