@@ -76,3 +76,18 @@ An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep L
 | **Meningioma (`meningioma`)** | 1,735 | 26.07% | Balanced |
 | **No Tumor (`notumor`)** | 1,398 | 21.01% | Balanced |
 | **Total Cohort** | **6,655** | **100.00%** | Verified |
+
+## Step 6: Class Imbalance Evaluation, Resampling & Stratified Partitioning
+- **Imbalance Audit:** Confirmed a majority-to-minority ratio of **1.27:1** (`glioma`: 26.66% vs. `notumor`: 21.01%), satisfying standard multi-class balance conditions (<70/30 rule).
+- **Cost-Sensitive Class Weights:** Computed balanced loss weights (`glioma`: 0.9379, `meningioma`: 0.9589, `pituitary`: 0.9518, `notumor`: 1.1901) for deep learning cross-entropy optimization.
+- **Resampling Benchmarks:** Evaluated Random Undersampling (5,592 samples), SMOTE (7,096 samples), and ADASYN (7,011 samples) on tabular feature distributions.
+- **Stratified Partitioning (70/15/15):** Created leak-free train, validation, and test subsets preserving class proportions across partitions:
+
+| Partition Split | Ratio | Glioma | Meningioma | Pituitary | No Tumor | Total Scans |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Train Set** | 70.0% | 1,242 | 1,214 | 1,223 | 979 | **4,658** |
+| **Validation Set** | 15.0% | 266 | 260 | 262 | 210 | **998** |
+| **Test Set** | 15.0% | 266 | 261 | 263 | 209 | **999** |
+| **Total Cohort** | **100.0%** | **1,774** | **1,735** | **1,748** | **1,398** | **6,655** |
+
+- **Artifact:** Exported final partitioned manifest to `data/metadata/metadata_stratified_step6.csv`.
