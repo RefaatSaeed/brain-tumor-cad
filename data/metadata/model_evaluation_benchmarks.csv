@@ -1,0 +1,6 @@
+Model Architecture,Accuracy (%),Balanced Acc (%),Precision (Macro),Recall (Sensitivity),F1-Macro (%),F1-Weighted (%),Cohen's Kappa (κ),MCC,OvR ROC-AUC
+L2 Logistic Regression,70.57%,71.33%,70.70%,71.33%,70.82%,70.11%,0.6066,0.6080,0.8868
+Cost-Complexity Pruned Tree,74.77%,75.93%,76.85%,75.93%,75.66%,74.71%,0.6632,0.6674,0.9003
+Regularized Neural Net (MLP),71.77%,72.76%,71.69%,72.76%,72.03%,71.22%,0.6230,0.6242,0.9097
+Random Forest Ensemble,77.78%,78.90%,78.23%,78.90%,78.47%,77.59%,0.7033,0.7038,0.9387
+Gradient Boosting (Champion),76.88%,77.99%,77.71%,77.99%,77.83%,76.82%,0.6910,0.6911,0.9347
