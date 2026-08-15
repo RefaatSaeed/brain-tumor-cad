@@ -8,7 +8,7 @@ A rigorous, end-to-end Computer-Aided Diagnosis (CAD) system for multi-class bra
 
 Unlike standard benchmarking repositories, this project encompasses a complete clinical data science lifecycle. It begins with an exhaustive 8-step data engineering pipeline—featuring cryptographic deduplication, morphological ROI standardization, and bias-variance diagnostics—to establish a highly controlled Machine Learning baseline (Random Forest). 
 
-The pipeline then scales to a comparative evaluation of state-of-the-art Deep Learning architectures (ConvNeXt-Tiny vs. Swin-Transformer-Tiny), achieving a peak **94.56% holdout accuracy**. To bridge the gap between high-dimensional feature extraction and clinical trust, the system integrates **Grad-CAM (Explainable AI)** to visually validate that all diagnostic predictions are grounded in genuine anatomical pathology rather than spurious image artifacts.
+The pipeline then scales to a comparative evaluation of state-of-the-art Deep Learning architectures (ConvNeXt-Tiny vs. Swin-Transformer-Tiny), achieving a peak **94.56% holdout accuracy**. To bridge the gap between high-dimensional feature extraction and clinical trust, the system integrates **Grad-CAM (Explainable AI)** to visually validate that all diagnostic predictions are grounded in genuine anatomical pathology rather than spurious image artifacts.n.
 
 ## Project Structure
 
@@ -31,6 +31,7 @@ The pipeline then scales to a comparative evaluation of state-of-the-art Deep Le
 ├── .gitignore               # Ignored files and directories
 └── README.md                # Project documentation
 
+```
 ## Step 1: Data Exploration & Validation
 - **Dataset Size:** 7200 MRI scans across 4 classes (`glioma`, `meningioma`, `pituitary`, `notumor`).
 - **Data Integrity:** 100% readable files, verified channel shapes, and dimension distributions cataloged in `data/metadata/metadata_raw.csv`.
