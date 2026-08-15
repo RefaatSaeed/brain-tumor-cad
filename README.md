@@ -48,7 +48,7 @@ The pipeline then scales to a comparative evaluation of state-of-the-art Deep Le
 - **Technique Comparison:**
   - *Listwise Deletion:* Resulted in a $19.11\%$ reduction in usable samples ($5,673$ retained).
   - *Univariate (Mean/Median):* Higher reconstruction bias ($\text{MAE} = 6.9032$ / $4.9079$).
-  - *Multivariate (KNN, $k=5$):* Lowest reconstruction error (**$\text{MAE} = 1.2029$**), preserving complex feature correlations.
+  - *Multivariate (KNN, *k=5*):* Lowest reconstruction error (**$\text{MAE} = 1.2029$**), preserving complex feature correlations.
   - *Sequential (Forward/Backward Fill):* Effectively retained predictive stability ($76.24\%$ CV accuracy) for spatial slice series.
 - **Artifact:** Exported verified dataset to `data/metadata/metadata_clean_step3.csv`.
 
