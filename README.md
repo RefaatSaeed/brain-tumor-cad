@@ -1,11 +1,35 @@
-# Multimodal Brain Tumor MRI Classification & Explainability (CAD)
+# End-to-End Brain Tumor MRI Classification & Explainable AI (CAD)
 
-An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep Learning architectures (ConvNeXt vs. Swin Transformer) on Brain MRI multi-class detection.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+A rigorous, end-to-end Computer-Aided Diagnosis (CAD) system for multi-class brain tumor classification (Glioma, Meningioma, Pituitary, and No Tumor) from MRI scans. 
+
+Unlike standard benchmarking repositories, this project encompasses a complete clinical data science lifecycle. It begins with an exhaustive 8-step data engineering pipeline—featuring cryptographic deduplication, morphological ROI standardization, and bias-variance diagnostics—to establish a highly controlled Machine Learning baseline (Random Forest). 
+
+The pipeline then scales to a comparative evaluation of state-of-the-art Deep Learning architectures (ConvNeXt-Tiny vs. Swin-Transformer-Tiny), achieving a peak **94.56% holdout accuracy**. To bridge the gap between high-dimensional feature extraction and clinical trust, the system integrates **Grad-CAM (Explainable AI)** to visually validate that all diagnostic predictions are grounded in genuine anatomical pathology rather than spurious image artifacts.
 
 ## Project Structure
-- `data/metadata/`: Metadata registries and exploratory manifestations.
-- `notebooks/`: Modular experimental notebooks adhering to the 8-step AMIT data engineering rubric.
-- `src/`: Core preprocessing, model architectures, and training scripts.
+
+```text
+├── data/
+│   ├── metadata/            # Metadata registries and stratified manifests
+│   └── raw/                 # Raw MRI scans partitioned by class and split
+├── models/                  # Optimal model weight checkpoints (.pth)
+│   ├── best_convnext.pth
+│   └── best_swin.pth
+├── notebooks/               # Modular experimental notebooks
+├── results/                 # Output artifacts and metrics
+│   └── final_benchmark.csv  # Final evaluation metrics for DL models
+├── src/                     # Core preprocessing, architectures, and scripts
+│   ├── __init__.py
+│   ├── dataset.py           # PyTorch Dataset loaders and augmentations
+│   ├── engine.py            # AMP training loops and evaluation routines
+│   └── models.py            # ConvNeXt and Swin Transformer definitions
+├── .gitattributes           # Git LFS configuration for large files
+├── .gitignore               # Ignored files and directories
+└── README.md                # Project documentation
 
 ## Step 1: Data Exploration & Validation
 - **Dataset Size:** 7200 MRI scans across 4 classes (`glioma`, `meningioma`, `pituitary`, `notumor`).
