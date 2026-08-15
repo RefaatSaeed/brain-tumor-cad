@@ -147,20 +147,20 @@ An end-to-end Computer-Aided Diagnosis (CAD) pipeline benchmarking modern Deep L
 - **Artifact:** Exported benchmark audit to `data/metadata/model_evaluation_benchmarks.csv`.
 
 
-## Key Findings
+## Deep Learning Benchmarks & Key Findings
 
-Our comparative analysis highlights the effectiveness of modern deep learning architectures for automated brain tumor classification:
+Our comparative analysis evaluates the effectiveness of modern Deep Learning architectures (CNNs vs. Vision Transformers) against a traditional Machine Learning baseline for automated brain tumor classification.
 
-| Architecture | Test Accuracy | Macro F1-Score | Clinical Interpretability |
-| :--- | :--- | :--- | :--- |
-| Random Forest (Baseline) | 77.78% | 78.47% | Low |
-| **ConvNeXt-Tiny** | **99.20%** | **99.23%** | **High (Grad-CAM)** |
-| Swin-Transformer-Tiny | 99.10% | 99.12% | High (Attention) |
+| Architecture | Test Accuracy | Macro F1-Score | Precision | Recall |
+| :--- | :--- | :--- | :--- | :--- |
+| Random Forest (Baseline) | 77.78% | 78.47% | 78.23% | 78.90% |
+| **ConvNeXt-Tiny (CNN)** | **94.56%** | **94.44%** | **95.06%** | **94.56%** |
+| Swin-Transformer-Tiny (ViT) | 94.00% | 93.88% | 94.49% | 94.00% |
 
 ### Highlights:
-- **Architectural Performance:** Deep Learning models surpassed traditional ML baselines by over 20% in overall accuracy, demonstrating the power of feature extraction via deep hierarchical architectures.
-- **Explainability (XAI):** We integrated Grad-CAM to visualize model decision-making. The high overlap between the model's activations and known clinical tumor locations provides "white-box" evidence, building trust for clinical applications.
-- **Robustness:** Stratified dataset management and cost-sensitive loss functions ensured balanced classification, effectively handling the intrinsic class imbalance in the source MRI dataset.
+- **State-of-the-Art Improvement:** Transfer learning with modern architectures resulted in an approximate **16.7% absolute increase** in accuracy over standard baseline ML pipelines.
+- **CNNs vs. Transformers:** The modernized convolutional network (`ConvNeXt-Tiny`) slightly outperformed the hierarchical Vision Transformer (`Swin-Transformer-Tiny`). The strong inductive biases of CNNs for local spatial correlations remain highly advantageous for small-to-medium medical imaging datasets.
+- **Class Imbalance Mitigation:** By utilizing a stratified data split and implementing cost-sensitive Cross-Entropy loss, both deep learning models achieved highly balanced Precision and Recall metrics, ensuring reliable detection across all four tumor classes (Glioma, Meningioma, Pituitary, and No Tumor).
 
 ---
 ### Future Directions

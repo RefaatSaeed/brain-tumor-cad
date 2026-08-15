@@ -1,0 +1,4 @@
+Model,Test Accuracy (%),Macro F1 (%),Precision (%),Recall (%)
+Random Forest (Baseline),77.78%,78.47%,78.23%,78.90%
+ConvNeXt-Tiny,94.56%,94.44%,95.06%,94.56%
+Swin-Transformer,94.00%,93.88%,94.49%,94.00%
